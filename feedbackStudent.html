@@ -2,9 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+  <title>Feedbacksession</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
 
+    .flex-container {
+      display: flex;
+      border: 3px solid #000a65;
+      justify-content: center;
+      align-items: start;
+      height: 89vh;
+    }
+
+    .header {
+      font-size: 36pt;
+      font-weight: bold;
+      background-color: #839aff;
+      color: #000a65;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+    .arrowbutton {
+      color: green;
+      background-color: white;
+      width: 50px;
+      height: 50px;
+      font-size: 25px;
+      justify-content: center;
+      text-align: center;
+    }
+    .arrowbutton:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">Insert Kursname here</div>
+  <!-- one container for all feedback elements -->
+  <div id="feedbackContainer" class="flex-container">
+    <div>
+      <table id="itemTable" style="align-items: center; text-align: center">
+        <tr>
+          <td>
+            <h1>Verständlichkeit Sprache</h1>
+            <h3 style="border: 3px solid #222222">**insert Sternebewertung**</h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1>Verständlichkeit Inhalt</h1>
+            <h3 style="border: 3px solid #222222">**insert Sternebewertung**</h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1>Verständlichkeit Folien</h1>
+            <h3 style="border: 3px solid #222222">**insert Sternebewertung**</h3>
+          </td>
+        </tr>
+        <tr  style="text-align: right">
+          <td>
+            <button class="arrowbutton"
+                    id="starButton">
+              <i class="fa fa-arrow-right"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h3 style="border: 3px solid #222222"></h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1>Dein Kommentar</h1>
+            <input type="text" id="comment" placeholder="Dein Kommentar..."/>
+          </td>
+        </tr>
+        <tr style="text-align: right">
+          <td>
+            <!-- hier sollte dann ne art Aktivierungscheck sein der guckt ob kommentare freuigeschaltet sind,
+            kann ja erstmal per 10sek timer laufen wenn die Seite lädt -->
+            <button class="arrowbutton"
+                    id="commentButton">
+              <i class="fa fa-arrow-right"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </body>
 </html>
