@@ -36,10 +36,30 @@
     .arrowbutton:hover {
       background-color: #f1f1f1;
     }
+
   </style>
+  <script>
+    let count = 10;
+    function commentCounter(count) {
+      let e = document.getElementById("commentButtonSlot");
+      let b = document.getElementById("timer");
+      e.hidden = true;
+
+      const timer = setInterval(function() {
+        count -=1;
+        b.innerText = "Kommentare sind verfügbar in: " + count;
+        if (count === 0) {
+          clearInterval(timer);
+          e.hidden = false;
+          b.innerText = "Kommentare freigeschaltet!"
+          return;
+        }
+      }, 1000);
+    }
+  </script>
 </head>
 
-<body>
+<body onLoad="commentCounter(count)">
   <div class="header">Insert Kursname here</div>
   <!-- one container for all feedback elements -->
   <div id="feedbackContainer" class="flex-container">
@@ -78,10 +98,11 @@
         <tr>
           <td>
             <h1>Dein Kommentar</h1>
+            <h4 id="timer"></h4>
             <input type="text" id="comment" placeholder="Dein Kommentar..."/>
           </td>
         </tr>
-        <tr style="text-align: right">
+        <tr id="commentButtonSlot" style="text-align: right">
           <td>
             <!-- hier sollte dann ne art Aktivierungscheck sein der guckt ob kommentare freuigeschaltet sind,
             kann ja erstmal per 10sek timer laufen wenn die Seite lädt -->
