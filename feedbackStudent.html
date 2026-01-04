@@ -59,6 +59,28 @@
         }
       }, 1000);
     }
+
+    function setStarRating(n, row) {
+      let stars = Array.from(document.getElementsByClassName("star " + row));
+      removeStarRating(row);
+      for (let i = 0; i < n; i++) {
+        if (parseInt(stars[i].getAttribute("pos")) == (i + 1)) {
+          stars[i].innerText = "★";
+          stars[i].style.color = "gold";
+          stars[i].className = "star active " + row;
+        }
+      }
+    }
+
+    function removeStarRating(row) {
+      let stars = Array.from(document.getElementsByClassName("star " + row));
+      stars.forEach (star => {
+        star.innerText = "☆";
+        star.style.color = "black";
+        star.className = "star inactive " + row;
+      });
+
+    }
   </script>
 </head>
 
@@ -130,29 +152,5 @@
       </table>
     </div>
   </div>
-  <script>
-
-    function setStarRating(n, row) {
-      let stars = Array.from(document.getElementsByClassName("star " + row));
-      removeStarRating(row);
-      for (let i = 0; i < n; i++) {
-        if (parseInt(stars[i].getAttribute("pos")) == (i + 1)) {
-          stars[i].innerText = "★";
-          stars[i].style.color = "gold";
-          stars[i].className = "star active " + row;
-        }
-      }
-    }
-
-    function removeStarRating(row) {
-      let stars = Array.from(document.getElementsByClassName("star " + row));
-      stars.forEach (star => {
-          star.innerText = "☆";
-          star.style.color = "black";
-          star.className = "star inactive " + row;
-      });
-
-    }
-  </script>
 </body>
 </html>
