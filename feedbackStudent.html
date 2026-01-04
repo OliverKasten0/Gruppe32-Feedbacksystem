@@ -123,7 +123,8 @@
         <tr  style="text-align: right">
           <td>
             <button class="arrowbutton"
-                    id="starButton">
+                    id="starButton"
+                    onclick="alert('Feedback abgeschickt!'); removeStarRating(1); removeStarRating(2); removeStarRating(3);">
               <i class="fa fa-arrow-right"></i></button>
           </td>
         </tr>
@@ -144,7 +145,8 @@
             <!-- hier sollte dann ne art Aktivierungscheck sein der guckt ob kommentare freuigeschaltet sind,
             kann ja erstmal per 10sek timer laufen wenn die Seite lädt -->
             <button class="arrowbutton"
-                    id="commentButton">
+                    id="commentButton"
+                    onclick="alert('Kommentar gesendet!')">
               <i class="fa fa-arrow-right"></i>
             </button>
           </td>
