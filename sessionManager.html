@@ -69,6 +69,17 @@
             border-radius: 5px;
         }
 
+        .qrbutton {
+            color: #839aff;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            justify-content: center;
+            text-align: center;
+            border-radius: 5px;
+        }
+
         .deletebutton:hover {
             background-color: #f1f1f1;
             cursor: pointer;
@@ -80,6 +91,11 @@
         }
 
         .addbutton:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .qrbutton:hover {
             background-color: #f1f1f1;
             cursor: pointer;
         }
@@ -142,6 +158,10 @@
             showSuccessMessage("editSessionSuccess");
         }
 
+        function showQRCode() {
+            alert('Normally, a pop-up with the QR code for this specific session would appear here for the students to scan.\nSince this is a prototype, this functionality is not currently available.');
+        }
+
         function addSession() {
             if (showAddAlert) {
                 alert('This is a popup where the user would normally be able to add a new session.\nIn this prototype only a dummy session without editable details will be added.\nThis message will not be displayed again.');
@@ -163,6 +183,9 @@
                 }
                 if (btn.classList.contains("deletebutton")) {
                     btn.setAttribute("onclick", `deleteSession('${newId}')`);
+                }
+                if (btn.classList.contains("qrbutton")) {
+                    btn.setAttribute("onclick", `showQRCode('${newId}')`);
                 }
             });
 
@@ -225,6 +248,11 @@
                         </button>
                     </td>
                     <td>
+                        <button class="qrbutton" onclick="showQRCode('sessionTemplate')">
+                            <i class="fa fa-qrcode "></i>
+                        </button>
+                    </td>
+                    <td>
                         <button class="deletebutton" onclick="deleteSession('sessionTemplate')">
                             <i class="fa fa-trash-o "></i>
                         </button>
@@ -246,6 +274,11 @@
                     <td>
                         <button class="editbutton" onclick="editSession('session1')">
                             <i class="fa fa-pencil "></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="qrbutton" onclick="showQRCode('sessionTemplate')">
+                            <i class="fa fa-qrcode "></i>
                         </button>
                     </td>
                     <td>
