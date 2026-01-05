@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SessionManager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .flex-container {
+            display: flex;
+            border: 0px solid #000a65;
+            justify-content: center;
+            align-items: start;
+            height: 89vh;
+        }
+
+        .session {
+            border: 2px solid #676774;
+            padding: 10px;
+            border-radius: 5px;
+            width: 500px;
+            font-size: 20px;
+            background-color: #839aff;
+            justify-content: left;
+            cursor: pointer;
+        }
+
+        .header {
+            font-size: 36pt;
+            font-weight: bold;
+            background-color: #839aff;
+            color: #000a65;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .deletebutton {
+            color: red;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            justify-content: center;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .editbutton {
+            color: black;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            justify-content: center;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .addbutton {
+            color: black;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            justify-content: center;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .deletebutton:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .editbutton:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .addbutton:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .delete-success-message {
+            color: red;
+            font-weight: bold;
+            margin-left: 10px;
+            display: none;
+        }
+
+        .edit-success-message {
+            color: #839aff;
+            font-weight: bold;
+            margin-left: 10px;
+            display: none;
+        }
+
+        .add-success-message {
+            color: #839aff;
+            font-weight: bold;
+            margin-left: 10px;
+            display: none;
+        }
+
+        .title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-left: 8px;
+            line-height: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let sessionCount = 1;
+        let showAddAlert = true;
+
+        function hideMessages() {
+            let del = document.getElementById("deleteSessionSuccess");
+            let edit = document.getElementById("editSessionSuccess");
+            let add = document.getElementById("addSessionSuccess");
+            del.style.display = "none";
+            edit.style.display = "none";
+            add.style.display = "none";
+        }
+
+        function deleteSession(sessionId) {
+            let session = document.getElementById(sessionId);
+            session.remove();
+            hideMessages();
+            showSuccessMessage("deleteSessionSuccess");
+        }
+
+        function editSession(sessionId) {
+            alert('This is a popup where the user would normally be able to edit the details of a session.\nCurrently not available in this prototype!');
+            hideMessages();
+            showSuccessMessage("editSessionSuccess");
+        }
+
+        function addSession() {
+            if (showAddAlert) {
+                alert('This is a popup where the user would normally be able to add a new session.\nIn this prototype only a dummy session without editable details will be added.\nThis message will not be displayed again.');
+                showAddAlert = false;
+            }
+
+            const template = document.getElementById("sessionTemplate");
+            const clone = template.cloneNode(true); // deep clone
+            sessionCount++;
+            const newId = "session" + sessionCount;
+            clone.id = newId;
+            clone.style.display = "";
+
+            // Update buttons to use correct IDs
+            const buttons = clone.querySelectorAll("button");
+            buttons.forEach(btn => {
+                if (btn.classList.contains("editbutton")) {
+                    btn.setAttribute("onclick", `editSession('${newId}')`);
+                }
+                if (btn.classList.contains("deletebutton")) {
+                    btn.setAttribute("onclick", `deleteSession('${newId}')`);
+                }
+            });
+
+            // Append after the last session row
+            const table = document.getElementById("itemTable");
+            const lastSession = table.querySelector(`tr[id^="session"]:last-of-type`);
+            lastSession.after(clone);
+
+            hideMessages();
+            showSuccessMessage("addSessionSuccess");
+        }
+
+        function showSuccessMessage(elementId) {
+            let msg = document.getElementById(elementId);
+            msg.style.display = "inline";
+            setTimeout(function () {
+                msg.style.display = "none";
+            }, 3000);
+        }
+    </script>
+    <div class="header">Kursname: Session Manager</div>
+    <!-- one container for all feedback elements -->
+    <div id="sessionContainer" class="flex-container">
+        <div>
+            <table id="itemTable" style="align-items: center; text-align: center; padding: 5px;">
+                <tr>
+                    <td>
+                        <span class="title">Sessions verwalten</span>
+                        <button class="addbutton" onclick="addSession()">
+                            <i class="fa fa-plus "></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="deleteSessionSuccess" class="delete-success-message">Session erfolgreich
+                            gelöscht!</span>
+                        <span id="editSessionSuccess" class="edit-success-message">Session erfolgreich
+                            bearbeitet!</span>
+                        <span id="addSessionSuccess" class="edit-success-message">Session erfolgreich
+                            hinzugefügt!</span>
+                    </td>
+                </tr>
+                <tr id="sessionTemplate" style="text-align: left; display: none">
+                    <td class="session" onclick="location.href='feedbackProf.html'" style="vertical-align: middle;">
+                        <div style="display: flex; align-items: center;">
+                            <div><span style="font-weight: bold" ;>Session X</span>
+                                <br>
+                                <span>01.01.1970 - 00:00</span>
+                            </div>
+                            </span>
+                            <span style="text-align: right; flex: 1; font-weight: bold; font-size: 30px;"><i
+                                    class="fa fa-chevron-right"></i>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="editbutton" onclick="editSession('session1')">
+                            <i class="fa fa-pencil "></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="deletebutton" onclick="deleteSession('session1')">
+                            <i class="fa fa-trash-o "></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr id="session1" style="text-align: left">
+                    <td class="session" onclick="location.href='feedbackProf.html'" style="vertical-align: middle;">
+                        <div style="display: flex; align-items: center;">
+                            <div><span style="font-weight: bold" ;>Session X</span>
+                                <br>
+                                <span>01.01.1970 - 00:00</span>
+                            </div>
+                            </span>
+                            <span style="text-align: right; flex: 1; font-weight: bold; font-size: 30px;"><i
+                                    class="fa fa-chevron-right"></i>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="editbutton" onclick="editSession('session1')">
+                            <i class="fa fa-pencil "></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="deletebutton" onclick="deleteSession('session1')">
+                            <i class="fa fa-trash-o "></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
