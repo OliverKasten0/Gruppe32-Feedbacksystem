@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Feedbacksession</title>
+  <title>FeedbackSession</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
-
     .flex-container {
       display: flex;
       border: 3px solid #000a65;
@@ -24,6 +24,7 @@
       justify-content: center;
       text-align: center;
     }
+
     .arrowbutton {
       color: green;
       background-color: white;
@@ -32,14 +33,19 @@
       font-size: 25px;
       justify-content: center;
       text-align: center;
+      border-radius: 5px;
     }
+
     .arrowbutton:hover {
       background-color: #f1f1f1;
+      cursor: pointer;
     }
+
     .star {
-    font-size: 8vh;
-    cursor: pointer;
+      font-size: 8vh;
+      cursor: pointer;
     }
+
     .success-message {
       color: green;
       font-weight: bold;
@@ -55,8 +61,8 @@
       let b = document.getElementById("timer");
       e.hidden = true;
 
-      const timer = setInterval(function() {
-        count -=1;
+      const timer = setInterval(function () {
+        count -= 1;
         b.innerText = "Kommentare sind verfügbar in: " + count;
         if (count === 0) {
           clearInterval(timer);
@@ -81,7 +87,7 @@
 
     function removeStarRating(row) {
       let stars = Array.from(document.getElementsByClassName("star " + row));
-      stars.forEach (star => {
+      stars.forEach(star => {
         star.innerText = "☆";
         star.style.color = "black";
         star.className = "star inactive " + row;
@@ -92,15 +98,18 @@
     function showSuccessMessage(elementId) {
       let msg = document.getElementById(elementId);
       msg.style.display = "inline";
-      setTimeout(function() {
+      setTimeout(function () {
         msg.style.display = "none";
       }, 3000);
+      if (elementId == "commentSuccess") {
+        document.getElementById("comment").value = "";
+      }
     }
   </script>
 </head>
 
 <body onLoad="commentCounter(count)">
-  <div class="header">Insert Kursname here</div>
+  <div class="header">Kursname: Session 1 | Feedback</div>
   <!-- one container for all feedback elements -->
   <div id="feedbackContainer" class="flex-container">
     <div>
@@ -135,11 +144,10 @@
             <span onclick="setStarRating(5, 3)" class="star inactive 3" pos="5">☆</span>
           </td>
         </tr>
-        <tr  style="text-align: right">
+        <tr style="text-align: right">
           <td>
-            <button class="arrowbutton"
-                    id="starButton"
-                    onclick="showSuccessMessage('starSuccess'); removeStarRating(1); removeStarRating(2); removeStarRating(3);">
+            <button class="arrowbutton" id="starButton"
+              onclick="showSuccessMessage('starSuccess'); removeStarRating(1); removeStarRating(2); removeStarRating(3);">
               <i class="fa fa-arrow-right"></i></button>
             <span id="starSuccess" class="success-message">Erfolgreich abgeschickt!</span>
           </td>
@@ -153,16 +161,14 @@
           <td>
             <h1>Dein Kommentar</h1>
             <h4 id="timer"></h4>
-            <input type="text" id="comment" placeholder="Dein Kommentar..."/>
+            <input type="text" id="comment" placeholder="Dein Kommentar..." />
           </td>
         </tr>
         <tr id="commentButtonSlot" style="text-align: right">
           <td>
             <!-- hier sollte dann ne art Aktivierungscheck sein der guckt ob kommentare freuigeschaltet sind,
             kann ja erstmal per 10sek timer laufen wenn die Seite lädt -->
-            <button class="arrowbutton"
-                    id="commentButton"
-                    onclick="showSuccessMessage('commentSuccess')">
+            <button class="arrowbutton" id="commentButton" onclick="showSuccessMessage('commentSuccess')">
               <i class="fa fa-arrow-right"></i>
             </button>
             <span id="commentSuccess" class="success-message">Erfolgreich abgeschickt!</span>
@@ -172,4 +178,5 @@
     </div>
   </div>
 </body>
+
 </html>
