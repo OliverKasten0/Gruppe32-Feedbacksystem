@@ -242,9 +242,18 @@
             hinzugefügt!</span>
     </div>
 
+    
+
     <!-- one container for all feedback elements -->
     <div id="sessionContainer" class="flex-container">
         <div>
+            <div>
+    <hr class="divider" style="margin-bottom: 15px">
+    <button class="addbutton" onclick="addSession()">
+        <span class="btn-text">Neue Session erstellen</span>
+        <i class="fa fa-plus btn-icon"></i>
+    </button>
+    </div>
             <table id="itemTable" style="align-items: center; text-align: center; padding: 5px;">
                 <tr id="sessionTemplate" style="text-align: left; display: none">
                     <td class="session" onclick="location.href='feedbackProf.html'" style="vertical-align: middle;">
@@ -308,11 +317,6 @@
                     </td>
                 </tr>
             </table>
-            <hr class="divider" style="margin-bottom: 15px">
-            <button class="addbutton" onclick="addSession()">
-                <span class="btn-text">Neue Session erstellen</span>
-                <i class="fa fa-plus btn-icon"></i>
-            </button>
         </div>
 
     </div>
