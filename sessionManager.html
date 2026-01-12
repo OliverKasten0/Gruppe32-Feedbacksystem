@@ -11,7 +11,9 @@
             border: 0px solid #000a65;
             justify-content: center;
             align-items: start;
-            height: 89vh;
+            height: 70vh;
+            margin-top: 10px;
+            margin-bottom: 20px;
         }
 
         .session {
@@ -59,14 +61,33 @@
         }
 
         .addbutton {
-            color: black;
-            background-color: white;
-            width: 50px;
+            position: relative; /* anchor for absolute icon */
+            width: 100%;
             height: 50px;
+            background-color: white;
+            color: black;
             font-size: 25px;
-            justify-content: center;
-            text-align: center;
             border-radius: 5px;
+            padding: 0 15px;
+            cursor: pointer;
+            font-family: inherit;
+            margin-bottom: 10px;
+        }
+
+        .btn-text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .btn-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .qrbutton {
@@ -124,9 +145,9 @@
         .title {
             font-size: 2em;
             font-weight: bold;
-            margin-left: 8px;
-            line-height: 1;
-            margin-right: 10px;
+            text-align: center;
+            margin: 20px auto 10px;
+            width: 500px;
         }
     </style>
 </head>
@@ -208,18 +229,12 @@
         }
     </script>
     <div class="header">Kursname: Session Manager</div>
+    <div class="title">Sessions verwalten</div>
     <!-- one container for all feedback elements -->
     <div id="sessionContainer" class="flex-container">
         <div>
             <table id="itemTable" style="align-items: center; text-align: center; padding: 5px;">
-                <tr>
-                    <td>
-                        <span class="title">Sessions verwalten</span>
-                        <button class="addbutton" onclick="addSession()">
-                            <i class="fa fa-plus "></i>
-                        </button>
-                    </td>
-                </tr>
+
                 <tr>
                     <td>
                         <span id="deleteSessionSuccess" class="delete-success-message">Session erfolgreich
@@ -244,17 +259,19 @@
                         </div>
                     </td>
                     <td>
-                        <button class="editbutton" onclick="editSession('sessionTemplate')">
+                        <button title="Session Details bearbeiten" class="editbutton"
+                            onclick="editSession('sessionTemplate')">
                             <i class="fa fa-pencil "></i>
                         </button>
                     </td>
                     <td>
-                        <button class="qrbutton" onclick="location.href='qrcode.html'"> <!--onclick="showQRCode('sessionTemplate')"> -->
+                        <button title="QR Code anzeigen" class="qrbutton" onclick="location.href='qrcode.html'">
+                            <!--onclick="showQRCode('sessionTemplate')"> -->
                             <i class="fa fa-qrcode "></i>
                         </button>
                     </td>
                     <td>
-                        <button class="deletebutton" onclick="deleteSession('sessionTemplate')">
+                        <button title="Session löschen" class="deletebutton" onclick="deleteSession('sessionTemplate')">
                             <i class="fa fa-trash-o "></i>
                         </button>
                     </td>
@@ -273,23 +290,30 @@
                         </div>
                     </td>
                     <td>
-                        <button class="editbutton" onclick="editSession('session1')">
+                        <button title="Session Details bearbeiten" class="editbutton" onclick="editSession('session1')">
                             <i class="fa fa-pencil "></i>
                         </button>
                     </td>
                     <td>
-                        <button class="qrbutton" onclick="location.href='qrcode.html'"> <!--onclick="showQRCode('session1')"> -->
+                        <button title="QR Code anzeigen" class="qrbutton" onclick="location.href='qrcode.html'">
+                            <!--onclick="showQRCode('session1')"> -->
                             <i class="fa fa-qrcode "></i>
                         </button>
                     </td>
                     <td>
-                        <button class="deletebutton" onclick="deleteSession('session1')">
+                        <button title="Session löschen" class="deletebutton" onclick="deleteSession('session1')">
                             <i class="fa fa-trash-o "></i>
                         </button>
                     </td>
                 </tr>
             </table>
+            <hr class="divider" style="margin-bottom: 15px">
+            <button class="addbutton" onclick="addSession()">
+                <span class="btn-text">Neue Session erstellen</span>
+                <i class="fa fa-plus btn-icon"></i>
+            </button>
         </div>
+
     </div>
 </body>
 
