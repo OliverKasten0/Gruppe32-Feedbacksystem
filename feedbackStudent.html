@@ -53,6 +53,18 @@
       margin-left: 10px;
       display: none;
       position: absolute;
+      ;
+    }
+    .undobutton {
+      position: absolute;
+      background-color: white;
+      color: darkgreen;
+      font-family: 'DejaVu Math TeX Gyre';
+      display: none;
+    }
+    .undobutton:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
     }
   </style>
   <script>
@@ -71,7 +83,7 @@
           b.innerText = "Kommentare freigeschaltet!"
           return;
         }
-      }, 1000);
+      }, 100);
     }
 
     function setStarRating(n, row) {
@@ -99,12 +111,25 @@
     function showSuccessMessage(elementId) {
       let msg = document.getElementById(elementId);
       msg.style.display = "inline";
+      msg.innerText = "Erfolgreich abgeschickt!";
+
+      let undo = document.getElementById("undocomment");
+      undo.style.display= "inline"
       setTimeout(function () {
         msg.style.display = "none";
       }, 3000);
       if (elementId == "commentSuccess") {
         document.getElementById("comment").value = "";
       }
+    }
+    function undoComment() {
+      let msg = document.getElementById('commentSuccess');
+      msg.style.display = "inline";
+      msg.innerText = "Kommentar zurückgenommen!"
+      setTimeout(function() {
+        msg.style.display = "none";
+        msg.innerText = "Erfolgreich abgeschickt!";
+      }, 3000);
     }
   </script>
 </head>
@@ -172,7 +197,10 @@
             <button class="arrowbutton" id="commentButton" onclick="showSuccessMessage('commentSuccess')">
               <i class="fa fa-arrow-right"></i>
             </button>
-            <span id="commentSuccess" class="success-message">Erfolgreich abgeschickt!</span>
+            <span id="commentSuccess" class="success-message">Erfolgreich abgeschickt!
+            </span>
+            <button class="undobutton" id="undocomment" style="margin-top: 28px; margin-left: 10px;"
+                    onclick="undoComment()">Letzter Kommentar zurücknehmen</button>
           </td>
         </tr>
       </table>
