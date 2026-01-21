@@ -134,6 +134,12 @@
             arrowButton.disabled =
                 usernameField.value.trim() === "" ||
                 passwordField.value.trim() === "";
+            if (arrowButton.disabled) {
+                arrowButton.style.color = "#616060";
+            } else {
+                arrowButton.style.color = "green";
+            }
+            
         }
 
         usernameField.addEventListener("input", updateButtonState);
