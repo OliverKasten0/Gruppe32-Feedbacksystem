@@ -1,89 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
+    <meta charset="UTF-8">
+    <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-    * {
-      box-sizing: border-box; /* include margin, border, and padding in size */
-      font-family: "Arial Black", sans-serif;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+            /* include margin, border, and padding in size */
+            font-family: "Arial Black", sans-serif;
+        }
 
-    .flex-container {
-      display: flex;
-      flex-direction: column;
-      border: 0px solid #000a65;
-      justify-content: center;
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            border: 0px solid #000a65;
+            justify-content: center;
 
-      align-items: center;
-      height: 89vh;
-    }
-    .flex-container div {
-        margin: 5px;
-        padding: 1px;
-    }
+            align-items: center;
+            height: 89vh;
+        }
 
-    img{
-      width: 50%;
-      height: 50%;
-      object-fit: contain;
-    }
+        .flex-container div {
+            margin: 5px;
+            padding: 1px;
+        }
 
-    .header {
-      font-size: 36pt;
-      font-weight: bold;
-      background-color: #839aff;
-      color: #000a65;
-      padding: 15px;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-    }
-    .arrowbutton {
-        color: green;
-        background-color: white;
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-        justify-content: center;
-        text-align: center;
-        border-radius: 5px;
-    }
-    .arrowbutton:hover {
-        background-color: #f1f1f1;
-    }
+        img {
+            width: 50%;
+            height: 50%;
+            object-fit: contain;
+        }
 
-  </style>
+        .header {
+            font-size: 36pt;
+            font-weight: bold;
+            background-color: #839aff;
+            color: #000a65;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
 
-  <script>
-      function logger() {
-          let user = document.getElementById("username").value;
-          let pass = document.getElementById("password").value;
-          if(user === "admin" && pass === "passwort") {
-              location.href='sessionManager.html'
-              return;
-          }
-      }
-  </script>
+        .arrowbutton {
+            color: green;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            justify-content: center;
+            text-align: center;
+            border-radius: 5px;
+        }
 
+        .arrowbutton:hover:not(:disabled) {
+            background-color: #f1f1f1;
+        }
+
+        .arrowbutton:disabled {
+            background-color: #8a8686;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 2px solid #000a65;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .modal-button:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
+
 <body>
-<div class="header">Feedbacksessionmanagementportal</div>
-<div class="flex-container">
-    <div>
-        <h4 style="text-align: center">Logge dich hier ein!</h4>
-        <input type="email" id="username" placeholder="Benutzername"/>
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <h2>Ungültige Anmeldedaten</h2>
+            <p>Benutzername oder Passwort ist falsch.</p>
+            <div class="modal-buttons">
+                <button class="modal-button confirm-button" onclick="closeModal()">OK</button>
+            </div>
+        </div>
     </div>
-    <div>
-        <input type="password" id="password" placeholder="Passwort"/>
+    <div class="header">Feedbacksessionmanagementportal</div>
+    <div class="flex-container">
+        <div>
+            <h4 style="text-align: center">Logge dich hier ein!</h4>
+            <input type="email" id="username" placeholder="Benutzername" />
+        </div>
+        <div>
+            <input type="password" id="password" placeholder="Passwort" />
+        </div>
+        <div>
+            <button id="arrowbutton" class="arrowbutton" onclick="logger()">
+                <i class="fa fa-arrow-right"></i>
+            </button>
+        </div>
     </div>
-    <div>
-        <button class="arrowbutton"
-                onclick="logger()">
-            <i class="fa fa-arrow-right"></i>
-        </button>
-    </div>
-</div>
+
+    <script>
+        arrowButton = document.getElementById("arrowbutton");
+        usernameField = document.getElementById("username");
+        passwordField = document.getElementById("password");
+
+        function updateButtonState() {
+            arrowButton.disabled =
+                usernameField.value.trim() === "" ||
+                passwordField.value.trim() === "";
+        }
+
+        usernameField.addEventListener("input", updateButtonState);
+        passwordField.addEventListener("input", updateButtonState);
+
+        function logger() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+            if (user === "admin" && pass === "passwort") {
+                location.href = 'sessionManager.html'
+                return;
+            } else {
+                showCredentialsAlert();
+            }
+        }
+
+        function showCredentialsAlert() {
+            document.getElementById('alertModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('alertModal').style.display = 'none';
+        }
+
+        updateButtonState();
+    </script>
 </body>
+
 </html>
