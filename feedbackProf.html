@@ -82,7 +82,7 @@
             color: #000a65;
             padding: 15px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             text-align: center;
         }
 
@@ -154,6 +154,29 @@
             color: black;
         }
 
+        .backbutton {
+            color: black;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            justify-content: center;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .backbutton:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .headertitle {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -200,14 +223,21 @@
         </div>
     </div>
 
-    <div class="header">Kursname: Session X | 01.01.1970 | 00:00</div>
+    <div class="header">
+        <button title="Zurück" class="backbutton"
+                            onclick="history.back()">
+                            <i class="fa fa-chevron-left" style="margin-left: -5px;"></i>
+                        </button>
+        <span class="headertitle">Kursname: Session X | 01.01.1970 | 00:00</span>
+    </div>
+
     <!-- one container for all feedback elements -->
     <div id="feedbackContainer" class="flex-container">
         <div>
             <table id="itemTable" style="align-items: center; text-align: center">
                 <tr>
                     <td>
-                        <h1 style="white-space: nowrap";>Verständlichkeit Sprache</h1>
+                        <h1 style="white-space: nowrap" ;>Verständlichkeit Sprache</h1>
                         <div style="display: flex; align-items: center; justify-content: center;">
                             <span class="star" style="color: gold">★</span>
                             <span class="star" style="color: gold">★</span>
@@ -234,7 +264,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h1 style="white-space: nowrap";>Verständlichkeit Inhalt</h1>
+                        <h1 style="white-space: nowrap" ;>Verständlichkeit Inhalt</h1>
                         <div style="display: flex; align-items: center; justify-content: center;">
 
                             <span class="star" style="color: gold">★</span>
@@ -262,7 +292,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h1 style="white-space: nowrap";>Verständlichkeit Folien</h1>
+                        <h1 style="white-space: nowrap" ;>Verständlichkeit Folien</h1>
                         <div style="display: flex; align-items: center; justify-content: center;">
                             <span class="star" style="color: gold">★</span>
                             <span class="star" style="color: gold">★</span>

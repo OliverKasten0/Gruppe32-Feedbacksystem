@@ -12,8 +12,8 @@
 
     .flex-container {
       display: flex;
-        flex-direction: column;
-      border: 3px solid #000a65;
+      flex-direction: column;
+      border: 0px solid #000a65;
       justify-content: center;
 
       align-items: center;
@@ -61,7 +61,6 @@
           let user = document.getElementById("username").value;
           let pass = document.getElementById("password").value;
           if(user === "admin" && pass === "passwort") {
-              //hier kommt dan Geo's Dozentenwebsite
               location.href='sessionManager.html'
               return;
           }

@@ -8,7 +8,7 @@
   <style>
     .flex-container {
       display: flex;
-      border: 3px solid #000a65;
+      border: 0px solid #000a65;
       justify-content: center;
       align-items: start;
       height: 110vh;
@@ -21,8 +21,8 @@
       color: #000a65;
       padding: 15px;
       display: flex;
-      justify-content: center;
       text-align: center;
+      justify-content: flex-start;
     }
 
     .arrowbutton {
@@ -55,6 +55,7 @@
       position: absolute;
       ;
     }
+
     .undobutton {
       position: absolute;
       background-color: white;
@@ -62,9 +63,34 @@
       font-family: 'DejaVu Math TeX Gyre';
       display: none;
     }
+
     .undobutton:hover {
       background-color: #f1f1f1;
       cursor: pointer;
+    }
+
+    .backbutton {
+      color: black;
+      background-color: white;
+      width: 50px;
+      height: 50px;
+      font-size: 25px;
+      justify-content: center;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    .backbutton:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
+
+    .headertitle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      white-space: nowrap;
     }
   </style>
   <script>
@@ -135,7 +161,13 @@
 </head>
 
 <body onLoad="commentCounter(count)">
-  <div class="header">Kursname: Session 1 | Feedback</div>
+  <div class="header">
+    <button title="Zurück" class="backbutton" onclick="history.back()">
+      <i class="fa fa-chevron-left" style="margin-left: -5px;"></i>
+    </button>
+    <span class="headertitle">Kursname: Session 1 | Feedback</span>
+  </div>
+
   <!-- one container for all feedback elements -->
   <div id="feedbackContainer" class="flex-container">
     <div>

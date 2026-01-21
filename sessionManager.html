@@ -34,7 +34,8 @@
             color: #000a65;
             padding: 15px;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: flex-start;
             text-align: center;
         }
 
@@ -73,6 +74,17 @@
             cursor: pointer;
             font-family: inherit;
             margin-bottom: 5px;
+        }
+
+        .backbutton {
+            color: black;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            justify-content: center;
+            text-align: center;
+            border-radius: 5px;
         }
 
         .btn-text {
@@ -123,24 +135,26 @@
             cursor: pointer;
         }
 
+        .backbutton:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
         .delete-success-message {
             color: red;
             font-weight: bold;
-            margin-left: 10px;
             display: none;
         }
 
         .edit-success-message {
             color: #839aff;
             font-weight: bold;
-            margin-left: 10px;
             display: none;
         }
 
         .add-success-message {
             color: #839aff;
             font-weight: bold;
-            margin-left: 10px;
             display: none;
         }
 
@@ -148,9 +162,24 @@
             font-size: 2em;
             font-weight: bold;
             text-align: center;
-            margin: 20px auto 10px;
-            width: 500px;
+            margin-right: 15px;
         }
+
+        .headertitle {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .titlebox {
+            display: flex;
+            margin: 15px auto 10px;
+            justify-content: center;
+            align-items: baseline;
+        }
+
     </style>
 </head>
 
@@ -230,30 +259,38 @@
             }, 3000);
         }
     </script>
-    <div class="header">Kursname: Session Manager</div>
-    <div class="title">Sessions verwalten</div>
-
-    <div class="success-messages" style="text-align: center";>
-        <span id="deleteSessionSuccess" class="delete-success-message">Session erfolgreich
-            gelöscht!</span>
-        <span id="editSessionSuccess" class="edit-success-message">Session erfolgreich
-            bearbeitet!</span>
-        <span id="addSessionSuccess" class="edit-success-message">Session erfolgreich
-            hinzugefügt!</span>
+    <div class="header">
+        <button title="Zurück" class="backbutton" onclick="history.back()">
+            <i class="fa fa-chevron-left" style="margin-left: -5px;"></i>
+        </button>
+        <span class="headertitle">Kursname: Session Manager</span>
     </div>
 
-    
+    <div class="titlebox">
+        <span class="title">Sessions verwalten</span>
+
+        <span class="success-messages" style="text-align: center;">
+            <span id="deleteSessionSuccess" class="delete-success-message">Session erfolgreich
+                gelöscht!</span>
+            <span id="editSessionSuccess" class="edit-success-message">Session erfolgreich
+                bearbeitet!</span>
+            <span id="addSessionSuccess" class="edit-success-message">Session erfolgreich
+                hinzugefügt!</span>
+        </span>
+    </div>
+
+
 
     <!-- one container for all feedback elements -->
     <div id="sessionContainer" class="flex-container">
         <div>
             <div>
-    <hr class="divider" style="margin-bottom: 15px">
-    <button class="addbutton" onclick="addSession()">
-        <span class="btn-text">Neue Session erstellen</span>
-        <i class="fa fa-plus btn-icon"></i>
-    </button>
-    </div>
+                <hr class="divider" style="margin-bottom: 15px">
+                <button class="addbutton" onclick="addSession()">
+                    <span class="btn-text">Neue Session erstellen</span>
+                    <i class="fa fa-plus btn-icon"></i>
+                </button>
+            </div>
             <table id="itemTable" style="align-items: center; text-align: center; padding: 5px;">
                 <tr id="sessionTemplate" style="text-align: left; display: none">
                     <td class="session" onclick="location.href='feedbackProf.html'" style="vertical-align: middle;">

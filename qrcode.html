@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-<title>QRCode</title>
+  <title>QRCode</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     * {
-      box-sizing: border-box; /* include margin, border, and padding in size */
+      box-sizing: border-box;
+      /* include margin, border, and padding in size */
       font-family: "Arial Black", sans-serif;
     }
 
     .flex-container {
       display: flex;
-      border: 3px solid #000a65;
+      border: 0px solid #000a65;
       justify-content: center;
       align-items: center;
-      height: 89vh;
+      height: 85vh;
     }
 
-    img{
-      width: 50%;
-      height: 50%;
+    img {
+      max-width: 35%;
+      max-height: 35%;
+      height: auto;
+      width: auto;
       object-fit: contain;
     }
 
@@ -30,19 +35,68 @@
       color: #000a65;
       padding: 15px;
       display: flex;
-      justify-content: center;
       text-align: center;
     }
 
+    .qrbutton {
+      max-width: 90%;
+      max-height: 90%;
+      padding: 0;
+      border: none;
+      background: none;
+    }
+
+    .headertitle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .header {
+      font-size: 36pt;
+      font-weight: bold;
+      background-color: #839aff;
+      color: #000a65;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+    }
+
+    .backbutton {
+      color: black;
+      background-color: white;
+      width: 50px;
+      height: 50px;
+      font-size: 25px;
+      justify-content: center;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    .backbutton:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
   </style>
 </head>
+
 <body>
-<div class="header">Trete der Feedbacksession bei!</div>
-<div class="flex-container">
-    <button type="image" onclick="location.href='feedbackStudent.html'">
-        <img src="https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg"/>
+  <div class="header">
+    <button title="Zurück" class="backbutton" onclick="history.back()">
+      <i class="fa fa-chevron-left" style="margin-left: -5px;"></i>
+    </button>
+    <span class="headertitle">Trete der Feedbacksession bei!</span>
+  </div>
+  <div class="flex-container">
+    <button class="qrbutton" type="image" onclick="location.href='feedbackStudent.html'">
+      <img src="https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg" />
     </button>
 
-</div>
+  </div>
 </body>
+
 </html>
