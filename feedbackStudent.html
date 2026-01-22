@@ -109,7 +109,7 @@
           b.innerText = "Kommentare freigeschaltet!"
           return;
         }
-      }, 100);
+      }, 1000);
     }
 
     function setStarRating(n, row) {
@@ -138,14 +138,13 @@
       let msg = document.getElementById(elementId);
       msg.style.display = "inline";
       msg.innerText = "Erfolgreich abgeschickt!";
-
-      let undo = document.getElementById("undocomment");
-      undo.style.display= "inline"
       setTimeout(function () {
         msg.style.display = "none";
       }, 3000);
       if (elementId == "commentSuccess") {
         document.getElementById("comment").value = "";
+        let undo = document.getElementById("undocomment");
+        undo.style.display= "inline"
       }
     }
     function undoComment() {
