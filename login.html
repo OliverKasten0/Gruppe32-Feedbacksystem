@@ -109,10 +109,21 @@
             </div>
         </div>
     </div>
+    <div id="codeModal" class="modal">
+        <div>
+            <div class="modal-content">
+                <h2>Ungültiger Sessioncode</h2>
+                <p>Session mit diesem Code existiert nicht.</p>
+                <div class="modal-buttons">
+                    <button class="modal-button confirm-button" onclick="closeModal()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="header">Feedbacksessionmanagementportal</div>
     <div class="flex-container">
         <div>
-            <h4 style="text-align: center">Logge dich hier ein!</h4>
+            <h4 style="text-align: center">Für Dozierende: <br>Logge dich hier ein!</h4>
             <input type="email" id="username" placeholder="Benutzername" />
         </div>
         <div>
@@ -123,12 +134,24 @@
                 <i class="fa fa-arrow-right"></i>
             </button>
         </div>
+        <div style="align-items: center; align-content: center">
+            <h4 style="text-align: center; display: inline-block">Für Studierende: <br>Trete Session per Code bei!</h4>
+        </div>
+        <div>
+            <input type="text" id="code" placeholder="Sessioncode" />
+        </div>
+        <div>
+            <button id="arrowbuttonCode" class="arrowbutton" onclick="sessionJoin()">
+            <i class="fa fa-arrow-right"></i>
+        </button></div>
     </div>
 
     <script>
         arrowButton = document.getElementById("arrowbutton");
+        arrowButtonCode = document.getElementById("arrowbuttonCode")
         usernameField = document.getElementById("username");
         passwordField = document.getElementById("password");
+        codeField = document.getElementById("code");
 
         function updateButtonState() {
             arrowButton.disabled =
@@ -139,11 +162,14 @@
             } else {
                 arrowButton.style.color = "green";
             }
-            
+            arrowButtonCode.disabled =
+                codeField.value.trim() === ""
         }
 
         usernameField.addEventListener("input", updateButtonState);
         passwordField.addEventListener("input", updateButtonState);
+        codeField.addEventListener("input", updateButtonState)
+
 
         function logger() {
             let user = document.getElementById("username").value;
@@ -155,13 +181,25 @@
                 showCredentialsAlert();
             }
         }
+        function sessionJoin() {
+            let code = document.getElementById("code").value;
+            if (code == "A1B2C3") {
+                location.href='feedbackStudent.html'
+            } else {
+                showCodeAlert()
+            }
+        }
 
         function showCredentialsAlert() {
             document.getElementById('alertModal').style.display = 'block';
         }
+        function showCodeAlert() {
+            document.getElementById('codeModal').style.display = 'block';
+        }
 
         function closeModal() {
             document.getElementById('alertModal').style.display = 'none';
+            document.getElementById('codeModal').style.display = 'none';
         }
 
         updateButtonState();
